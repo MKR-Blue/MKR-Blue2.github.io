@@ -1,3658 +1,445 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Her Little World ♡</title>
-
 <style>
-
-/* =========================================================
-   BASIC SETUP
-========================================================= */
-
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+:root{
+  --ink:#533665;--deep:#6b3c85;--mid:#765099;--soft:#9a70ae;
+  --glass:rgba(255,255,255,.42);--line:rgba(255,255,255,.68);
+  --shadow:0 20px 60px rgba(78,43,98,.13);
 }
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    font-family:'Poppins',sans-serif;
-    color:#533665;
-
-    background:
-        radial-gradient(circle at 10% 15%,rgba(255,255,255,.75),transparent 25%),
-        radial-gradient(circle at 90% 10%,rgba(246,214,255,.8),transparent 28%),
-        radial-gradient(circle at 50% 90%,rgba(215,190,240,.55),transparent 30%),
-        linear-gradient(135deg,#eee0ff,#e7d3f7,#f8e8f7);
-
-    min-height:100vh;
-    overflow-x:hidden;
-}
-
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background-image:
-        radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px);
-    background-size:55px 55px;
-    opacity:.25;
-    z-index:-2;
-}
-
-h1,h2,h3,h4{
-    font-family:'Cormorant Garamond',serif;
-}
-
-button,
-input{
-    font-family:'Poppins',sans-serif;
-}
-
-
-/* =========================================================
-   FLOATING DECORATIONS
-========================================================= */
-
-#flowers,
-#sparkles{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-}
-
-#flowers{
-    z-index:1;
-    overflow:hidden;
-}
-
-#sparkles{
-    z-index:2;
-}
-
-.flower{
-    position:absolute;
-    bottom:-80px;
-    animation:floatFlower linear infinite;
-    opacity:.55;
-}
-
-@keyframes floatFlower{
-
-    0%{
-        transform:translateY(0) rotate(0deg);
-        opacity:0;
-    }
-
-    10%{
-        opacity:.65;
-    }
-
-    90%{
-        opacity:.5;
-    }
-
-    100%{
-        transform:translateY(-115vh) rotate(360deg);
-        opacity:0;
-    }
-
-}
-
-.spark{
-    position:absolute;
-    width:5px;
-    height:5px;
-    background:white;
-    border-radius:50%;
-    box-shadow:0 0 12px white;
-    animation:sparkle 2.5s ease-in-out infinite;
-}
-
-@keyframes sparkle{
-
-    0%,100%{
-        opacity:.1;
-        transform:scale(.5);
-    }
-
-    50%{
-        opacity:.9;
-        transform:scale(1.5);
-    }
-
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-.navbar{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:50;
-
-    padding:14px 22px;
-
-    background:rgba(255,255,255,.35);
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid rgba(255,255,255,.6);
-}
-
-.nav-inner{
-    max-width:1200px;
-    margin:auto;
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    font-family:'Cormorant Garamond',serif;
-    font-size:28px;
-    font-weight:700;
-    color:#70418a;
-}
-
-.progress-pill{
-    padding:8px 15px;
-    border-radius:30px;
-    background:rgba(255,255,255,.5);
-    font-size:12px;
-}
-
-
-/* =========================================================
-   GENERAL
-========================================================= */
-
-.section{
-    max-width:1150px;
-    margin:auto;
-    padding:95px 22px;
-}
-
-.heading{
-    text-align:center;
-    margin-bottom:45px;
-}
-
-.heading .eyebrow{
-    text-transform:uppercase;
-    letter-spacing:4px;
-    font-size:11px;
-    color:#986bb0;
-}
-
-.heading h2{
-    margin-top:8px;
-    font-size:58px;
-    color:#6d3f87;
-}
-
-.heading p{
-    margin-top:8px;
-    color:#80658b;
-}
-
-.glass{
-    background:rgba(255,255,255,.4);
-    border:1px solid rgba(255,255,255,.65);
-    backdrop-filter:blur(16px);
-    box-shadow:0 20px 60px rgba(78,43,98,.12);
-}
-
-.primary{
-    border:0;
-    padding:14px 25px;
-    border-radius:35px;
-
-    background:linear-gradient(135deg,#9c68b8,#765099);
-    color:white;
-
-    cursor:pointer;
-
-    box-shadow:0 10px 25px rgba(100,60,130,.22);
-
-    transition:.25s;
-}
-
-.primary:hover{
-    transform:translateY(-4px);
-}
-
-.secondary{
-    border:1px solid rgba(110,65,135,.2);
-    padding:12px 20px;
-    border-radius:30px;
-
-    background:rgba(255,255,255,.55);
-    color:#694778;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
-.secondary:hover{
-    transform:translateY(-3px);
-    background:#f5eafa;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    min-height:100vh;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    text-align:center;
-
-    padding:110px 20px 60px;
-}
-
-.hero-box{
-    max-width:900px;
-    padding:60px 35px;
-
-    border-radius:45px;
-
-    background:rgba(255,255,255,.35);
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.65);
-
-    box-shadow:0 30px 90px rgba(76,44,98,.15);
-}
-
-.hero-small{
-    letter-spacing:5px;
-    text-transform:uppercase;
-    font-size:11px;
-    color:#9a70ae;
-}
-
-.hero h1{
-    margin-top:15px;
-    font-size:clamp(70px,11vw,125px);
-    line-height:.8;
-    color:#6b3c85;
-}
-
-.hero h1 span{
-    display:block;
-    font-size:.38em;
-    margin-top:25px;
-    color:#966baa;
-}
-
-.hero p{
-    max-width:650px;
-    margin:30px auto;
-    line-height:1.9;
-    color:#72567e;
-}
-
-.hero-heart{
-    font-size:45px;
-    margin-bottom:15px;
-    animation:heartbeat 1.8s infinite;
-}
-
-@keyframes heartbeat{
-
-    0%,100%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.18);
-    }
-
-}
-
-
-/* =========================================================
-   ARCADE CARDS
-========================================================= */
-
-.arcade-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.arcade-card{
-    padding:30px;
-    min-height:220px;
-
-    border-radius:30px;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    position:relative;
-    overflow:hidden;
-}
-
-.arcade-card:hover{
-    transform:translateY(-8px) rotate(-.4deg);
-    box-shadow:0 25px 55px rgba(75,40,95,.18);
-}
-
-.arcade-icon{
-    font-size:42px;
-    margin-bottom:15px;
-}
-
-.arcade-card h3{
-    font-size:31px;
-    color:#6c4183;
-}
-
-.arcade-card p{
-    margin-top:8px;
-    font-size:13px;
-    line-height:1.7;
-    color:#7b6085;
-}
-
-.play-tag{
-    position:absolute;
-    right:20px;
-    bottom:20px;
-
-    font-size:11px;
-
-    background:#e5d0ed;
-    padding:6px 11px;
-    border-radius:20px;
-}
-
-
-/* =========================================================
-   GAME PANELS
-========================================================= */
-
-.game-panel{
-    display:none;
-
-    margin-top:30px;
-    padding:35px;
-
-    border-radius:35px;
-
-    text-align:center;
-}
-
-.game-panel.active{
-    display:block;
-    animation:panelIn .4s ease;
-}
-
-@keyframes panelIn{
-
-    from{
-        opacity:0;
-        transform:translateY(15px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-.game-panel h3{
-    font-size:40px;
-    color:#6d4086;
-}
-
-.game-subtitle{
-    font-size:13px;
-    color:#80678a;
-    margin-top:5px;
-}
-
-.game-message{
-    min-height:28px;
-    margin:20px auto;
-    font-weight:500;
-}
-
-
-/* =========================================================
-   TIC TAC TOE
-========================================================= */
-
-.xo-board{
-    display:grid;
-    grid-template-columns:repeat(3,90px);
-    grid-template-rows:repeat(3,90px);
-
-    gap:10px;
-
-    justify-content:center;
-
-    margin:25px auto;
-}
-
-.xo-cell{
-    border:0;
-    border-radius:18px;
-
-    background:rgba(255,255,255,.65);
-
-    font-size:36px;
-    color:#70438a;
-
-    cursor:pointer;
-
-    box-shadow:0 5px 15px rgba(90,50,110,.08);
-
-    transition:.2s;
-}
-
-.xo-cell:hover{
-    transform:scale(1.04);
-    background:#f4e6fa;
-}
-
-
-/* =========================================================
-   SLIDING PUZZLE
-========================================================= */
-
-.puzzle-board{
-    width:310px;
-    height:310px;
-
-    margin:25px auto;
-
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-
-    gap:7px;
-
-    padding:7px;
-
-    background:#c9a7d9;
-    border-radius:20px;
-}
-
-.puzzle-tile{
-    border:0;
-    border-radius:13px;
-
-    background:#f7effb;
-
-    color:#70418a;
-
-    font-size:30px;
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.15s;
-}
-
-.puzzle-tile:hover{
-    transform:scale(.96);
-}
-
-.puzzle-tile.empty{
-    background:rgba(255,255,255,.18);
-    cursor:default;
-}
-
-
-/* =========================================================
-   MEMORY MATCH
-========================================================= */
-
-.memory-board{
-    display:grid;
-    grid-template-columns:repeat(4,70px);
-
-    justify-content:center;
-
-    gap:10px;
-
-    margin:25px auto;
-}
-
-.memory-card{
-    width:70px;
-    height:70px;
-
-    border:0;
-    border-radius:15px;
-
-    background:#c7a4d7;
-
-    cursor:pointer;
-
-    font-size:0;
-
-    transition:.25s;
-}
-
-.memory-card.flipped{
-    background:#f8effc;
-    font-size:30px;
-}
-
-.memory-card.matched{
-    background:#e6d0ef;
-}
-
-
-/* =========================================================
-   REACTION GAME
-========================================================= */
-
-.reaction-box{
-    width:min(600px,100%);
-    height:230px;
-
-    margin:25px auto;
-
-    border-radius:30px;
-
-    background:#ead9f2;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    font-size:24px;
-    color:#765180;
-
-    user-select:none;
-}
-
-.reaction-box.ready{
-    background:#b993ca;
-    color:white;
-}
-
-.reaction-box.go{
-    background:#82539d;
-    color:white;
-}
-
-
-/* =========================================================
-   WORD SCRAMBLE
-========================================================= */
-
-.scramble-word{
-    font-size:42px;
-    letter-spacing:8px;
-    margin:25px;
-    color:#70418a;
-}
-
-.answer-input{
-    width:min(350px,90%);
-    padding:13px 18px;
-
-    border-radius:30px;
-    border:1px solid #d7bee1;
-
-    outline:none;
-
-    text-align:center;
-
-    background:rgba(255,255,255,.7);
-    color:#543565;
-}
-
-
-/* =========================================================
-   WOULD YOU RATHER
-========================================================= */
-
-.wyr-options{
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
-    margin:25px auto;
-}
-
-.wyr-button{
-    width:min(330px,100%);
-    min-height:90px;
-
-    border:1px solid rgba(110,65,135,.2);
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,.6);
-
-    padding:20px;
-
-    cursor:pointer;
-
-    color:#674375;
-
-    transition:.25s;
-}
-
-.wyr-button:hover{
-    transform:translateY(-5px);
-    background:#f5eafa;
-}
-
-
-/* =========================================================
-   DICE / FORTUNE
-========================================================= */
-
-.dice{
-    font-size:90px;
-    margin:20px;
-
-    display:inline-block;
-}
-
-.roll{
-    animation:roll .6s;
-}
-
-@keyframes roll{
-
-    0%{transform:rotate(0) scale(1)}
-    50%{transform:rotate(180deg) scale(1.2)}
-    100%{transform:rotate(360deg) scale(1)}
-
-}
-
-.fortune-result{
-    min-height:90px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-family:'Cormorant Garamond',serif;
-    font-size:32px;
-
-    padding:15px;
-}
-
-
-/* =========================================================
-   FLAMES
-========================================================= */
-
-.flames-box{
-    max-width:800px;
-    margin:auto;
-
-    padding:40px;
-
-    border-radius:40px;
-
-    text-align:center;
-}
-
-.name-row{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-
-    margin:25px auto;
-}
-
-.name-input{
-    width:260px;
-
-    padding:15px 20px;
-
-    border-radius:35px;
-
-    border:1px solid #d5b9df;
-
-    background:rgba(255,255,255,.7);
-
-    outline:none;
-
-    text-align:center;
-
-    color:#5d3b6d;
-}
-
-.flames-letters{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-
-    margin:35px 0;
-}
-
-.flame-letter{
-    width:55px;
-    height:55px;
-
-    border-radius:18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#e0c6ea;
-
-    color:#70418a;
-
-    font-weight:600;
-
-    transition:.5s;
-}
-
-.flame-letter.removed{
-    opacity:0;
-    transform:scale(0) rotate(180deg);
-}
-
-.flames-result{
-    min-height:150px;
-}
-
-.flames-result .result-letter{
-    font-size:75px;
-    color:#7a4b95;
-}
-
-.flames-result h3{
-    font-size:45px;
-}
-
-.flames-result p{
-    margin-top:10px;
-}
-
-
-/* =========================================================
-   DATE ADVENTURE
-========================================================= */
-
-.date-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-.date-card{
-    display:flex;
-    align-items:center;
-    gap:17px;
-
-    padding:25px;
-
-    border-radius:25px;
-}
-
-.date-number{
-    min-width:55px;
-    height:55px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    border-radius:50%;
-
-    background:#dec5e9;
-
-    color:#70427f;
-}
-
-.date-card h3{
-    font-size:29px;
-}
-
-.date-card p{
-    font-size:12px;
-    margin-top:3px;
-}
-
-.date-check{
-    margin-left:auto;
-
-    width:40px;
-    height:40px;
-
-    border:0;
-    border-radius:50%;
-
-    background:#a479b7;
-    color:white;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   HAPPINESS
-========================================================= */
-
-.happiness{
-    text-align:center;
-
-    padding:60px 25px;
-
-    border-radius:40px;
-}
-
-.happiness h2{
-    font-size:65px;
-}
-
-.happy-message{
-    min-height:100px;
-
-    max-width:700px;
-
-    margin:20px auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-family:'Cormorant Garamond',serif;
-    font-size:34px;
-}
-
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-.achievement-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.achievement{
-    padding:25px;
-
-    border-radius:25px;
-
-    text-align:center;
-
-    opacity:.45;
-
-    filter:grayscale(.7);
-}
-
-.achievement.unlocked{
-    opacity:1;
-    filter:none;
-}
-
-.achievement-icon{
-    font-size:40px;
-}
-
-.achievement h3{
-    font-size:27px;
-    margin-top:10px;
-}
-
-
-/* =========================================================
-   FINAL SURPRISE
-========================================================= */
-
-.final{
-    min-height:100vh;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    padding:80px 20px;
-}
-
-.final-box{
-    max-width:850px;
-
-    padding:60px 30px;
-
-    border-radius:45px;
-}
-
-.locked{
-    font-size:60px;
-    margin:20px;
-}
-
-.final-content{
-    display:none;
-}
-
-.final-content.show{
-    display:block;
-    animation:finalAppear 2s ease;
-}
-
-@keyframes finalAppear{
-
-    from{
-        opacity:0;
-        transform:scale(.8);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-
-}
-
-.final-flower{
-    font-size:90px;
-
-    animation:bloom 2s ease-in-out infinite alternate;
-}
-
-@keyframes bloom{
-
-    from{
-        transform:scale(.9) rotate(-3deg);
-    }
-
-    to{
-        transform:scale(1.1) rotate(3deg);
-    }
-
-}
-
-.final-box h2{
-    font-size:75px;
-    color:#6c3d86;
-}
-
-.final-message{
-    font-family:'Cormorant Garamond',serif;
-    font-size:30px;
-    line-height:1.7;
-
-    margin-top:25px;
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-
-    background:rgba(50,25,60,.45);
-
-    backdrop-filter:blur(8px);
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    z-index:100;
-
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:min(600px,100%);
-
-    background:#fff7ff;
-
-    padding:40px;
-
-    border-radius:35px;
-
-    text-align:center;
-
-    position:relative;
-
-    box-shadow:0 30px 90px rgba(30,15,40,.3);
-}
-
-.modal-box h2{
-    font-size:48px;
-    color:#6c4085;
-}
-
-.modal-box p{
-    margin:20px 0;
-    line-height:1.8;
-}
-
-.close{
-    position:absolute;
-
-    top:13px;
-    right:18px;
-
-    border:0;
-    background:none;
-
-    font-size:27px;
-
-    color:#704580;
-
-    cursor:pointer;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    text-align:center;
-    padding:35px;
-
-    color:#80628b;
-
-    font-size:12px;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:850px){
-
-    .arcade-grid,
-    .achievement-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .date-grid{
-        grid-template-columns:1fr;
-    }
-
-}
-
+  font-family:Poppins,sans-serif;color:var(--ink);min-height:100vh;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(255,255,255,.8),transparent 25%),
+    radial-gradient(circle at 92% 10%,rgba(246,214,255,.82),transparent 28%),
+    radial-gradient(circle at 50% 90%,rgba(215,190,240,.58),transparent 32%),
+    linear-gradient(135deg,#eee0ff,#e7d3f7,#f8e8f7);
+}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.72) 1px,transparent 1px);background-size:55px 55px;opacity:.24;z-index:-2}
+h1,h2,h3,h4{font-family:"Cormorant Garamond",serif}
+button,input{font:inherit}
+button{border:0}
+#flowers,#sparkles{position:fixed;inset:0;pointer-events:none}
+#flowers{z-index:1;overflow:hidden}.flower{position:absolute;bottom:-80px;animation:floatFlower linear infinite;opacity:.55}
+@keyframes floatFlower{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.65}90%{opacity:.5}100%{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+#sparkles{z-index:2}.spark{position:absolute;width:5px;height:5px;background:white;border-radius:50%;box-shadow:0 0 12px white;animation:sparkle 2.5s ease-in-out infinite}
+@keyframes sparkle{0%,100%{opacity:.1;transform:scale(.5)}50%{opacity:.9;transform:scale(1.5)}}
+
+.navbar{position:fixed;top:0;left:0;width:100%;z-index:50;padding:14px 22px;background:rgba(255,255,255,.38);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.65)}
+.nav-inner{max-width:1200px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.logo{font:700 28px "Cormorant Garamond",serif;color:#70418a}
+.progress-pill{padding:8px 15px;border-radius:30px;background:rgba(255,255,255,.55);font-size:12px;box-shadow:0 6px 18px rgba(70,40,90,.06)}
+.section{max-width:1150px;margin:auto;padding:95px 22px}
+.heading{text-align:center;margin-bottom:45px}.heading .eyebrow{text-transform:uppercase;letter-spacing:4px;font-size:11px;color:#986bb0}
+.heading h2{margin-top:8px;font-size:58px;color:#6d3f87}.heading p{margin-top:8px;color:#80658b}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(16px);box-shadow:var(--shadow)}
+.primary,.secondary{cursor:pointer;transition:.25s}
+.primary{padding:14px 25px;border-radius:35px;background:linear-gradient(135deg,#9c68b8,#765099);color:#fff;box-shadow:0 10px 25px rgba(100,60,130,.22)}
+.primary:hover,.secondary:hover{transform:translateY(-4px)}
+.secondary{padding:12px 20px;border-radius:30px;border:1px solid rgba(110,65,135,.2);background:rgba(255,255,255,.58);color:#694778}
+.secondary:hover{background:#f5eafa}
+
+.hero{min-height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;padding:110px 20px 60px}
+.hero-box{max-width:900px;padding:60px 35px;border-radius:45px;background:rgba(255,255,255,.37);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:0 30px 90px rgba(76,44,98,.15)}
+.hero-small{letter-spacing:5px;text-transform:uppercase;font-size:11px;color:#9a70ae}
+.hero h1{margin-top:15px;font-size:clamp(70px,11vw,125px);line-height:.8;color:#6b3c85}
+.hero h1 span{display:block;font-size:.38em;margin-top:25px;color:#966baa}
+.hero p{max-width:650px;margin:30px auto;line-height:1.9;color:#72567e}
+.hero-heart{font-size:45px;margin-bottom:15px;animation:heartbeat 1.8s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+
+.arcade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.arcade-card{padding:30px;min-height:220px;border-radius:30px;cursor:pointer;transition:.3s;position:relative;overflow:hidden}
+.arcade-card:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;right:-50px;top:-55px;background:rgba(255,255,255,.24)}
+.arcade-card:hover{transform:translateY(-8px) rotate(-.4deg);box-shadow:0 25px 55px rgba(75,40,95,.18)}
+.arcade-icon{font-size:42px;margin-bottom:15px}.arcade-card h3{font-size:31px;color:#6c4183}.arcade-card p{margin-top:8px;font-size:13px;line-height:1.7;color:#7b6085}
+.play-tag{position:absolute;right:20px;bottom:20px;font-size:11px;background:#e5d0ed;padding:6px 11px;border-radius:20px}
+
+.game-panel{display:none;margin-top:30px;padding:35px;border-radius:35px;text-align:center}
+.game-panel.active{display:block;animation:panelIn .4s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.game-panel h3{font-size:40px;color:#6d4086}.game-subtitle{font-size:13px;color:#80678a;margin-top:5px}.game-message{min-height:28px;margin:20px auto;font-weight:500}
+
+.xo-board{display:grid;grid-template-columns:repeat(3,90px);grid-template-rows:repeat(3,90px);gap:10px;justify-content:center;margin:25px auto}
+.xo-cell{border-radius:18px;background:rgba(255,255,255,.68);font-size:36px;color:#70438a;cursor:pointer;box-shadow:0 5px 15px rgba(90,50,110,.08);transition:.2s}
+.xo-cell:hover{transform:scale(1.04);background:#f4e6fa}
+
+.puzzle-board{width:310px;height:310px;margin:25px auto;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:7px;background:#c9a7d9;border-radius:20px}
+.puzzle-tile{border-radius:13px;background:#f7effb;color:#70418a;font-size:30px;font-weight:600;cursor:pointer;transition:.15s}
+.puzzle-tile:hover{transform:scale(.96)}.puzzle-tile.empty{background:rgba(255,255,255,.18);cursor:default}
+
+.memory-board{display:grid;grid-template-columns:repeat(4,70px);justify-content:center;gap:10px;margin:25px auto}
+.memory-card{width:70px;height:70px;border-radius:15px;background:#c7a4d7;cursor:pointer;font-size:0;transition:.25s}
+.memory-card.flipped{background:#f8effc;font-size:30px}.memory-card.matched{background:#e6d0ef}
+
+.reaction-box{width:min(600px,100%);height:230px;margin:25px auto;border-radius:30px;background:#ead9f2;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:24px;color:#765180;user-select:none}
+.reaction-box.go{background:#82539d;color:white}.reaction-box.ready{background:#b993ca;color:white}
+.scramble-word{font-size:42px;letter-spacing:8px;margin:25px;color:#70418a}
+.answer-input{width:min(350px,90%);padding:13px 18px;border-radius:30px;border:1px solid #d7bee1;outline:none;text-align:center;background:rgba(255,255,255,.7);color:#543565}
+.wyr-options{display:flex;justify-content:center;flex-wrap:wrap;gap:15px;margin:25px auto}
+.wyr-button{width:min(330px,100%);min-height:90px;border:1px solid rgba(110,65,135,.2);border-radius:25px;background:rgba(255,255,255,.6);padding:20px;cursor:pointer;color:#674375;transition:.25s}
+.wyr-button:hover{transform:translateY(-5px);background:#f5eafa}
+.dice{font-size:90px;margin:20px;display:inline-block}.roll{animation:roll .6s}
+@keyframes roll{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.2)}100%{transform:rotate(360deg) scale(1)}}
+.fortune-result{min-height:90px;display:flex;align-items:center;justify-content:center;font:32px "Cormorant Garamond",serif;padding:15px;transition:.25s}
+
+.flames-box{max-width:800px;margin:auto;padding:40px;border-radius:40px;text-align:center}
+.name-row{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:25px auto}
+.name-input{width:260px;padding:15px 20px;border-radius:35px;border:1px solid #d5b9df;background:rgba(255,255,255,.7);outline:none;text-align:center;color:#5d3b6d}
+.flames-letters{display:flex;justify-content:center;gap:10px;margin:35px 0}
+.flame-letter{width:55px;height:55px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:#e0c6ea;color:#70418a;font-weight:600;transition:.5s}
+.flame-letter.removed{opacity:0;transform:scale(0) rotate(180deg)}
+.flames-result{min-height:150px}.flames-result .result-letter{font-size:75px;color:#7a4b95}.flames-result h3{font-size:45px}.flames-result p{margin-top:10px}
+
+.date-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.date-card{display:flex;align-items:center;gap:17px;padding:25px;border-radius:25px}
+.date-number{min-width:55px;height:55px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#dec5e9;color:#70427f}
+.date-card h3{font-size:29px}.date-card p{font-size:12px;margin-top:3px}.date-check{margin-left:auto;width:40px;height:40px;border-radius:50%;background:#a479b7;color:white;cursor:pointer;flex:none}
+
+.happiness{text-align:center;padding:60px 25px;border-radius:40px}.happiness h2{font-size:65px}
+.happy-message{min-height:100px;max-width:700px;margin:20px auto;display:flex;align-items:center;justify-content:center;font:34px "Cormorant Garamond",serif;transition:.25s}
+
+.achievement-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.achievement{padding:25px;border-radius:25px;text-align:center;opacity:.45;filter:grayscale(.7);transition:.3s}
+.achievement.unlocked{opacity:1;filter:none;transform:translateY(-3px)}.achievement-icon{font-size:40px}.achievement h3{font-size:27px;margin-top:10px}
+
+.final{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px}
+.final-box{max-width:850px;padding:60px 30px;border-radius:45px;position:relative;overflow:hidden}
+.final-box:before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle,rgba(255,255,255,.55),transparent 55%);animation:finalGlow 5s ease-in-out infinite;pointer-events:none}
+@keyframes finalGlow{0%,100%{transform:scale(.9);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+.locked{font-size:60px;margin:20px}.final-content{display:none;position:relative}.final-content.show{display:block;animation:finalAppear 2s ease}
+@keyframes finalAppear{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+.final-flower{font-size:90px;animation:bloom 2s ease-in-out infinite alternate}
+@keyframes bloom{from{transform:scale(.9) rotate(-3deg)}to{transform:scale(1.1) rotate(3deg)}}
+.final-box h2{font-size:75px;color:#6c3d86}.final-message{font:30px/1.7 "Cormorant Garamond",serif;margin-top:25px}
+
+.modal{position:fixed;inset:0;background:rgba(50,25,60,.45);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal.show{display:flex}.modal-box{width:min(600px,100%);background:#fff7ff;padding:40px;border-radius:35px;text-align:center;position:relative;box-shadow:0 30px 90px rgba(30,15,40,.3)}
+.modal-box h2{font-size:48px;color:#6c4085}.modal-box p{margin:20px 0;line-height:1.8}.close{position:absolute;top:13px;right:18px;background:none;font-size:27px;color:#704580;cursor:pointer}
+
+footer{text-align:center;padding:35px;color:#80628b;font-size:12px}
+@media(max-width:850px){.arcade-grid,.achievement-grid{grid-template-columns:1fr 1fr}.date-grid{grid-template-columns:1fr}}
 @media(max-width:550px){
-
-    .logo{
-        font-size:21px;
-    }
-
-    .progress-pill{
-        font-size:10px;
-    }
-
-    .hero-box{
-        padding:45px 20px;
-    }
-
-    .hero h1{
-        font-size:70px;
-    }
-
-    .heading h2{
-        font-size:45px;
-    }
-
-    .arcade-grid,
-    .achievement-grid{
-        grid-template-columns:1fr;
-    }
-
-    .game-panel{
-        padding:25px 15px;
-    }
-
-    .xo-board{
-        grid-template-columns:repeat(3,75px);
-        grid-template-rows:repeat(3,75px);
-    }
-
-    .puzzle-board{
-        width:280px;
-        height:280px;
-    }
-
-    .memory-board{
-        grid-template-columns:repeat(4,58px);
-    }
-
-    .memory-card{
-        width:58px;
-        height:58px;
-    }
-
-    .final-box h2{
-        font-size:55px;
-    }
-
-    .final-message{
-        font-size:25px;
-    }
-
+  .logo{font-size:21px}.progress-pill{font-size:10px}.hero-box{padding:45px 20px}.hero h1{font-size:70px}
+  .heading h2{font-size:45px}.arcade-grid,.achievement-grid{grid-template-columns:1fr}.game-panel{padding:25px 15px}
+  .xo-board{grid-template-columns:repeat(3,75px);grid-template-rows:repeat(3,75px)}
+  .puzzle-board{width:280px;height:280px}.memory-board{grid-template-columns:repeat(4,58px)}
+  .memory-card{width:58px;height:58px}.final-box h2{font-size:55px}.final-message{font-size:25px}
 }
-
 </style>
 </head>
-
-
 <body>
+<div id="flowers"></div><div id="sparkles"></div>
 
-<div id="flowers"></div>
-<div id="sparkles"></div>
+<nav class="navbar"><div class="nav-inner">
+  <div class="logo">her little world ♡</div>
+  <div class="progress-pill">✨ <span id="progressCount">0</span> / 4 discovered</div>
+</div></nav>
 
-
-<!-- =======================================================
-     NAVBAR
-======================================================= -->
-
-<nav class="navbar">
-
-    <div class="nav-inner">
-
-        <div class="logo">
-            her little world ♡
-        </div>
-
-        <div class="progress-pill">
-            ✨ <span id="progressCount">0</span> / 6 discovered
-        </div>
-
-    </div>
-
-</nav>
-
-
-<!-- =======================================================
-     HERO
-======================================================= -->
-
-<section class="hero">
-
-    <div class="hero-box">
-
-        <div class="hero-heart">
-            💜
-        </div>
-
-        <div class="hero-small">
-            a tiny universe made for you
-        </div>
-
-        <h1>
-            welcome
-            <span>to your little world ♡</span>
-        </h1>
-
-        <p>
-            A tiny place filled with games, silly questions,
-            future adventures, random happiness and a few
-            things I probably shouldn't have spent this much
-            time making.
-        </p>
-
-        <button class="primary" onclick="scrollToId('arcade')">
-            enter the world ✨
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =======================================================
-     ARCADE
-======================================================= -->
+<section class="hero"><div class="hero-box">
+  <div class="hero-heart">💜</div>
+  <div class="hero-small">a tiny universe made for you</div>
+  <h1>welcome<span>to your little world ♡</span></h1>
+  <p>A tiny place filled with games, silly questions, future adventures, random happiness and a few things I probably shouldn't have spent this much time making.</p>
+  <button class="primary" onclick="scrollToId('arcade')">enter the world ✨</button>
+</div></section>
 
 <section class="section" id="arcade">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            GAME ARCADE
-        </div>
-
-        <h2>
-            pick something to play 🎮
-        </h2>
-
-        <p>
-            Warning: I take absolutely none of these games seriously.
-        </p>
-
-    </div>
-
-
-    <div class="arcade-grid">
-
-
-        <!-- XO -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('xo')">
-
-            <div class="arcade-icon">
-                ❌⭕
-            </div>
-
-            <h3>
-                Tic-Tac-Toe
-            </h3>
-
-            <p>
-                Challenge the tiny computer.
-                Let's see who actually wins.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- PUZZLE -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('puzzle')">
-
-            <div class="arcade-icon">
-                🧩
-            </div>
-
-            <h3>
-                Sliding Puzzle
-            </h3>
-
-            <p>
-                Put the numbers back in order.
-                Don't give up halfway.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- MEMORY -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('memory')">
-
-            <div class="arcade-icon">
-                🃏
-            </div>
-
-            <h3>
-                Memory Match
-            </h3>
-
-            <p>
-                Find all the matching pairs.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- REACTION -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('reaction')">
-
-            <div class="arcade-icon">
-                ⚡
-            </div>
-
-            <h3>
-                Reaction Test
-            </h3>
-
-            <p>
-                How fast can you click?
-                No pressure.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- SCRAMBLE -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('scramble')">
-
-            <div class="arcade-icon">
-                🔤
-            </div>
-
-            <h3>
-                Word Scramble
-            </h3>
-
-            <p>
-                Unscramble little words before time runs out.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- WOULD YOU RATHER -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('wyr')">
-
-            <div class="arcade-icon">
-                🤔
-            </div>
-
-            <h3>
-                Would You Rather
-            </h3>
-
-            <p>
-                Impossible choices incoming.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- DICE -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('dice')">
-
-            <div class="arcade-icon">
-                🎲
-            </div>
-
-            <h3>
-                Lucky Dice
-            </h3>
-
-            <p>
-                Roll the dice and see what fate says.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- FORTUNE -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('fortune')">
-
-            <div class="arcade-icon">
-                🔮
-            </div>
-
-            <h3>
-                Love Fortune
-            </h3>
-
-            <p>
-                Ask the universe something.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-
-        <!-- FLAMES -->
-
-        <div class="arcade-card glass"
-             onclick="openGame('flames')">
-
-            <div class="arcade-icon">
-                💜
-            </div>
-
-            <h3>
-                FLAMES
-            </h3>
-
-            <p>
-                Put two names in and let destiny decide.
-            </p>
-
-            <span class="play-tag">
-                PLAY
-            </span>
-
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         XO GAME
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-xo">
-
-        <h3>
-            ❌ Tic-Tac-Toe ⭕
-        </h3>
-
-        <div class="game-subtitle">
-            You are X. The computer is O.
-        </div>
-
-        <div class="xo-board" id="xoBoard"></div>
-
-        <div class="game-message" id="xoMessage">
-            Your turn ♡
-        </div>
-
-        <button class="secondary" onclick="resetXO()">
-            restart
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         SLIDING PUZZLE
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-puzzle">
-
-        <h3>
-            🧩 Sliding Puzzle
-        </h3>
-
-        <div class="game-subtitle">
-            Arrange the numbers from 1 to 8.
-        </div>
-
-        <div class="puzzle-board" id="puzzleBoard"></div>
-
-        <div class="game-message" id="puzzleMessage">
-            Good luck 👀
-        </div>
-
-        <button class="secondary" onclick="shufflePuzzle()">
-            shuffle
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         MEMORY
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-memory">
-
-        <h3>
-            🃏 Memory Match
-        </h3>
-
-        <div class="game-subtitle">
-            Find every matching pair.
-        </div>
-
-        <div class="memory-board" id="memoryBoard"></div>
-
-        <div class="game-message" id="memoryMessage">
-            Find the pairs ♡
-        </div>
-
-        <button class="secondary" onclick="setupMemory()">
-            restart
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         REACTION
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-reaction">
-
-        <h3>
-            ⚡ Reaction Test
-        </h3>
-
-        <div class="game-subtitle">
-            Wait for purple. Then CLICK.
-        </div>
-
-        <div class="reaction-box" id="reactionBox"
-             onclick="reactionClick()">
-
-            click start below
-
-        </div>
-
-        <div class="game-message" id="reactionMessage"></div>
-
-        <button class="primary" onclick="startReaction()">
-            start
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         SCRAMBLE
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-scramble">
-
-        <h3>
-            🔤 Word Scramble
-        </h3>
-
-        <div class="game-subtitle">
-            Unscramble the word.
-        </div>
-
-        <div class="scramble-word" id="scrambleWord">
-            READY
-        </div>
-
-        <input
-            class="answer-input"
-            id="scrambleInput"
-            placeholder="type your answer"
-        >
-
-        <br><br>
-
-        <button class="primary"
-                onclick="checkScramble()">
-            check
-        </button>
-
-        <button class="secondary"
-                onclick="newScramble()">
-            next
-        </button>
-
-        <div class="game-message"
-             id="scrambleMessage">
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         WOULD YOU RATHER
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-wyr">
-
-        <h3>
-            🤔 Would You Rather
-        </h3>
-
-        <div class="game-subtitle" id="wyrQuestion">
-        </div>
-
-        <div class="wyr-options"
-             id="wyrOptions">
-        </div>
-
-        <div class="game-message"
-             id="wyrMessage">
-        </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         DICE
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-dice">
-
-        <h3>
-            🎲 Lucky Dice
-        </h3>
-
-        <div class="dice"
-             id="dice">
-            🎲
-        </div>
-
-        <div class="game-message"
-             id="diceMessage">
-            Roll your fate.
-        </div>
-
-        <button class="primary"
-                onclick="rollDice()">
-            roll the dice
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         FORTUNE
-    =================================================== -->
-
-    <div class="game-panel glass" id="game-fortune">
-
-        <h3>
-            🔮 Love Fortune
-        </h3>
-
-        <div class="game-subtitle">
-            Ask the universe absolutely anything.
-        </div>
-
-        <div class="fortune-result"
-             id="fortuneResult">
-            ✨
-        </div>
-
-        <button class="primary"
-                onclick="newFortune()">
-            reveal my fortune
-        </button>
-
-    </div>
-
-
-    <!-- ===================================================
-         FLAMES
-    =================================================== -->
-
-    <div class="game-panel glass"
-         id="game-flames">
-
-        <div class="flames-box">
-
-            <h3>
-                ♡ FLAMES ♡
-            </h3>
-
-            <div class="game-subtitle">
-                Okay... let's see what destiny says 👀
-            </div>
-
-            <div class="name-row">
-
-                <input
-                    class="name-input"
-                    id="flamesName1"
-                    placeholder="your name"
-                >
-
-                <input
-                    class="name-input"
-                    id="flamesName2"
-                    placeholder="her name"
-                >
-
-            </div>
-
-            <button class="primary"
-                    onclick="calculateFlames()">
-
-                calculate our fate 💜
-
-            </button>
-
-
-            <div class="flames-letters"
-                 id="flamesLetters">
-
-                <div class="flame-letter">F</div>
-                <div class="flame-letter">L</div>
-                <div class="flame-letter">A</div>
-                <div class="flame-letter">M</div>
-                <div class="flame-letter">E</div>
-                <div class="flame-letter">S</div>
-
-            </div>
-
-
-            <div class="flames-result"
-                 id="flamesResult">
-
-                <p>
-                    Enter the two names first...
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =======================================================
-     DATE ADVENTURE
-======================================================= -->
-
-<section class="section" id="dates">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            FUTURE ADVENTURES
-        </div>
-
-        <h2>
-            our date list 📍
-        </h2>
-
-        <p>
-            Things we should absolutely do someday.
-        </p>
-
-    </div>
-
-
-    <div class="date-grid">
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                01
-            </div>
-
-            <div>
-                <h3>
-                    Sunset Walk
-                </h3>
-
-                <p>
-                    Find somewhere pretty and stay until
-                    the sky changes.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                02
-            </div>
-
-            <div>
-                <h3>
-                    New Café
-                </h3>
-
-                <p>
-                    Find a café neither of us has tried.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                03
-            </div>
-
-            <div>
-                <h3>
-                    Movie Night
-                </h3>
-
-                <p>
-                    Movie + snacks + absolutely no productivity.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                04
-            </div>
-
-            <div>
-                <h3>
-                    Random Adventure
-                </h3>
-
-                <p>
-                    Go somewhere without planning everything.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                05
-            </div>
-
-            <div>
-                <h3>
-                    Food Hunt
-                </h3>
-
-                <p>
-                    Find something ridiculously good.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-
-        <div class="date-card glass">
-
-            <div class="date-number">
-                06
-            </div>
-
-            <div>
-                <h3>
-                    Make A Memory
-                </h3>
-
-                <p>
-                    Do something small we'll remember forever.
-                </p>
-            </div>
-
-            <button class="date-check"
-                    onclick="completeDate(this)">
-                ♡
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =======================================================
-     HAPPINESS MACHINE
-======================================================= -->
-
-<section class="section" id="happy">
-
-    <div class="happiness glass">
-
-        <div class="heading"
-             style="margin-bottom:10px">
-
-            <div class="eyebrow">
-                TINY HAPPINESS MACHINE
-            </div>
-
-            <h2>
-                ☀️
-            </h2>
-
-        </div>
-
-        <div class="happy-message"
-             id="happyMessage">
-
-            Click the button.
-            I have something for you. ♡
-
-        </div>
-
-        <button class="primary"
-                onclick="newHappyMessage()">
-
-            give me some happiness ✨
-
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =======================================================
-     ACHIEVEMENTS
-======================================================= -->
-
-<section class="section">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            YOUR LITTLE TROPHIES
-        </div>
-
-        <h2>
-            achievements 🏆
-        </h2>
-
-        <p>
-            Play around and unlock them.
-        </p>
-
-    </div>
-
-
-    <div class="achievement-grid">
-
-
-        <div class="achievement glass"
-             id="achievement-game">
-
-            <div class="achievement-icon">
-                🎮
-            </div>
-
-            <h3>
-                Gamer
-            </h3>
-
-            <p>
-                Play a game.
-            </p>
-
-        </div>
-
-
-        <div class="achievement glass"
-             id="achievement-flames">
-
-            <div class="achievement-icon">
-                💜
-            </div>
-
-            <h3>
-                Destiny
-            </h3>
-
-            <p>
-                Calculate FLAMES.
-            </p>
-
-        </div>
-
-
-        <div class="achievement glass"
-             id="achievement-happy">
-
-            <div class="achievement-icon">
-                ☀️
-            </div>
-
-            <h3>
-                Happiness
-            </h3>
-
-            <p>
-                Get a tiny happiness message.
-            </p>
-
-        </div>
-
-
-        <div class="achievement glass"
-             id="achievement-date">
-
-            <div class="achievement-icon">
-                📍
-            </div>
-
-            <h3>
-                Adventure
-            </h3>
-
-            <p>
-                Complete a date.
-            </p>
-
-        </div>
-
-
-        <div class="achievement glass"
-             id="achievement-puzzle">
-
-            <div class="achievement-icon">
-                🧩
-            </div>
-
-            <h3>
-                Puzzle Master
-            </h3>
-
-            <p>
-                Solve the sliding puzzle.
-            </p>
-
-        </div>
-
-
-        <div class="achievement glass"
-             id="achievement-all">
-
-            <div class="achievement-icon">
-                🌷
-            </div>
-
-            <h3>
-                Explorer
-            </h3>
-
-            <p>
-                Discover all six worlds.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =======================================================
-     FINAL SURPRISE
-======================================================= -->
-
-<section class="final">
-
-    <div class="final-box glass">
-
-        <div id="lockedFinal">
-
-            <div class="eyebrow">
-                ONE LAST THING
-            </div>
-
-            <h2>
-                something is waiting...
-            </h2>
-
-            <div class="locked">
-                🔒
-            </div>
-
-            <p>
-                Explore all six little worlds first.
-            </p>
-
-        </div>
-
-
-        <div class="final-content"
-             id="finalContent">
-
-            <div class="final-flower">
-                💐
-            </div>
-
-            <div class="eyebrow">
-                YOU FOUND EVERYTHING
-            </div>
-
-            <h2>
-                for you ♡
-            </h2>
-
-            <div class="final-message">
-
-                Happy Birthday, my favorite person. 💜
-
-                <br><br>
-
-                I made this tiny little world because
-                sometimes saying everything I want to say
-                in one message just doesn't feel enough.
-
-                <br><br>
-
-                So here are games, stupid little things,
-                future adventures, random happiness and
-                one giant collection of reasons to smile.
-
-                <br><br>
-
-                I hope this birthday gives you even a tiny
-                fraction of the happiness you deserve.
-
-                <br><br>
-
-                Here's to more laughs,
-                more random conversations,
-                more adventures,
-                more memories,
-                and so many more days together.
-
-                <br><br>
-
-                <strong>
-                    Happy Birthday. ♡
-                </strong>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<footer>
-    made with way too much love ♡
-</footer>
-
-
-<!-- =======================================================
-     MODAL
-======================================================= -->
-
-<div class="modal"
-     id="modal">
-
-    <div class="modal-box">
-
-        <button class="close"
-                onclick="closeModal()">
-            ×
-        </button>
-
-        <h2 id="modalTitle">
-        </h2>
-
-        <p id="modalText">
-        </p>
-
-        <button class="primary"
-                onclick="closeModal()">
-
-            keep exploring ♡
-
-        </button>
-
-    </div>
-
+<div class="heading"><div class="eyebrow">GAME ARCADE</div><h2>pick something to play 🎮</h2><p>Warning: I take absolutely none of these games seriously.</p></div>
+<div class="arcade-grid">
+  <div class="arcade-card glass" onclick="openGame('xo')"><div class="arcade-icon">❌⭕</div><h3>Tic-Tac-Toe</h3><p>Challenge the tiny computer. Let's see who actually wins.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('puzzle')"><div class="arcade-icon">🧩</div><h3>Sliding Puzzle</h3><p>Put the numbers back in order. Don't give up halfway.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('memory')"><div class="arcade-icon">🃏</div><h3>Memory Match</h3><p>Find all the matching pairs.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('reaction')"><div class="arcade-icon">⚡</div><h3>Reaction Test</h3><p>How fast can you click? No pressure.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('scramble')"><div class="arcade-icon">🔤</div><h3>Word Scramble</h3><p>Unscramble little words before time runs out.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('wyr')"><div class="arcade-icon">🤔</div><h3>Would You Rather</h3><p>Impossible choices incoming.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('dice')"><div class="arcade-icon">🎲</div><h3>Lucky Dice</h3><p>Roll the dice and see what fate says.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('fortune')"><div class="arcade-icon">🔮</div><h3>Love Fortune</h3><p>Ask the universe something.</p><span class="play-tag">PLAY</span></div>
+  <div class="arcade-card glass" onclick="openGame('flames')"><div class="arcade-icon">💜</div><h3>FLAMES</h3><p>Put two names in and let destiny decide.</p><span class="play-tag">PLAY</span></div>
 </div>
 
+<div class="game-panel glass" id="game-xo"><h3>❌ Tic-Tac-Toe ⭕</h3><div class="game-subtitle">You are X. The computer is O.</div><div class="xo-board" id="xoBoard"></div><div class="game-message" id="xoMessage">Your turn ♡</div><button class="secondary" onclick="resetXO()">restart</button></div>
+
+<div class="game-panel glass" id="game-puzzle"><h3>🧩 Sliding Puzzle</h3><div class="game-subtitle">Arrange the numbers from 1 to 8.</div><div class="puzzle-board" id="puzzleBoard"></div><div class="game-message" id="puzzleMessage">Good luck 👀</div><button class="secondary" onclick="shufflePuzzle()">shuffle</button></div>
+
+<div class="game-panel glass" id="game-memory"><h3>🃏 Memory Match</h3><div class="game-subtitle">Find every matching pair.</div><div class="memory-board" id="memoryBoard"></div><div class="game-message" id="memoryMessage">Find the pairs ♡</div><button class="secondary" onclick="setupMemory()">restart</button></div>
+
+<div class="game-panel glass" id="game-reaction"><h3>⚡ Reaction Test</h3><div class="game-subtitle">Wait for purple. Then CLICK.</div><div class="reaction-box" id="reactionBox" onclick="reactionClick()">click start below</div><div class="game-message" id="reactionMessage"></div><button class="primary" onclick="startReaction()">start</button></div>
+
+<div class="game-panel glass" id="game-scramble"><h3>🔤 Word Scramble</h3><div class="game-subtitle">Unscramble the word.</div><div class="scramble-word" id="scrambleWord">READY</div><input class="answer-input" id="scrambleInput" placeholder="type your answer"><br><br><button class="primary" onclick="checkScramble()">check</button> <button class="secondary" onclick="newScramble()">next</button><div class="game-message" id="scrambleMessage"></div></div>
+
+<div class="game-panel glass" id="game-wyr"><h3>🤔 Would You Rather</h3><div class="game-subtitle" id="wyrQuestion"></div><div class="wyr-options" id="wyrOptions"></div><div class="game-message" id="wyrMessage"></div></div>
+
+<div class="game-panel glass" id="game-dice"><h3>🎲 Lucky Dice</h3><div class="dice" id="dice">🎲</div><div class="game-message" id="diceMessage">Roll your fate.</div><button class="primary" onclick="rollDice()">roll the dice</button></div>
+
+<div class="game-panel glass" id="game-fortune"><h3>🔮 Love Fortune</h3><div class="game-subtitle">Ask the universe absolutely anything.</div><div class="fortune-result" id="fortuneResult">✨</div><button class="primary" onclick="newFortune()">reveal my fortune</button></div>
+
+<div class="game-panel glass" id="game-flames"><div class="flames-box">
+  <h3>♡ FLAMES ♡</h3><div class="game-subtitle">Okay... let's see what destiny says 👀</div>
+  <div class="name-row"><input class="name-input" id="flamesName1" placeholder="your name"><input class="name-input" id="flamesName2" placeholder="her name"></div>
+  <button class="primary" onclick="calculateFlames()">calculate our fate 💜</button>
+  <div class="flames-letters" id="flamesLetters"><div class="flame-letter">F</div><div class="flame-letter">L</div><div class="flame-letter">A</div><div class="flame-letter">M</div><div class="flame-letter">E</div><div class="flame-letter">S</div></div>
+  <div class="flames-result" id="flamesResult"><p>Enter the two names first...</p></div>
+</div></div>
+</section>
+
+<section class="section" id="dates"><div class="heading"><div class="eyebrow">FUTURE ADVENTURES</div><h2>our date list 📍</h2><p>Things we should absolutely do someday.</p></div>
+<div class="date-grid">
+  <div class="date-card glass"><div class="date-number">01</div><div><h3>Sunset Walk</h3><p>Find somewhere pretty and stay until the sky changes.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+  <div class="date-card glass"><div class="date-number">02</div><div><h3>New Café</h3><p>Find a café neither of us has tried.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+  <div class="date-card glass"><div class="date-number">03</div><div><h3>Movie Night</h3><p>Movie + snacks + absolutely no productivity.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+  <div class="date-card glass"><div class="date-number">04</div><div><h3>Random Adventure</h3><p>Go somewhere without planning everything.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+  <div class="date-card glass"><div class="date-number">05</div><div><h3>Food Hunt</h3><p>Find something ridiculously good.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+  <div class="date-card glass"><div class="date-number">06</div><div><h3>Make A Memory</h3><p>Do something small we'll remember forever.</p></div><button class="date-check" onclick="completeDate(this)">♡</button></div>
+</div></section>
+
+<section class="section" id="happy"><div class="happiness glass"><div class="heading" style="margin-bottom:10px"><div class="eyebrow">TINY HAPPINESS MACHINE</div><h2>☀️</h2></div><div class="happy-message" id="happyMessage">Click the button. I have something for you. ♡</div><button class="primary" onclick="newHappyMessage()">give me some happiness ✨</button></div></section>
+
+<section class="section"><div class="heading"><div class="eyebrow">YOUR LITTLE TROPHIES</div><h2>achievements 🏆</h2><p>Play around and unlock them.</p></div>
+<div class="achievement-grid">
+  <div class="achievement glass" id="achievement-game"><div class="achievement-icon">🎮</div><h3>Gamer</h3><p>Play a game.</p></div>
+  <div class="achievement glass" id="achievement-flames"><div class="achievement-icon">💜</div><h3>Destiny</h3><p>Calculate FLAMES.</p></div>
+  <div class="achievement glass" id="achievement-happy"><div class="achievement-icon">☀️</div><h3>Happiness</h3><p>Get a tiny happiness message.</p></div>
+  <div class="achievement glass" id="achievement-date"><div class="achievement-icon">📍</div><h3>Adventure</h3><p>Complete a date.</p></div>
+  <div class="achievement glass" id="achievement-puzzle"><div class="achievement-icon">🧩</div><h3>Puzzle Master</h3><p>Solve the sliding puzzle.</p></div>
+  <div class="achievement glass" id="achievement-all"><div class="achievement-icon">🌷</div><h3>Explorer</h3><p>Discover all four worlds.</p></div>
+</div></section>
+
+<section class="final"><div class="final-box glass">
+  <div id="lockedFinal"><div class="eyebrow">ONE LAST THING</div><h2>something is waiting...</h2><div class="locked">🔒</div><p>Explore all four little worlds first.</p></div>
+  <div class="final-content" id="finalContent"><div class="final-flower">💐</div><div class="eyebrow">YOU FOUND EVERYTHING</div><h2>for you ♡</h2>
+    <div class="final-message">Happy Birthday, my favorite person. 💜<br><br>I made this tiny little world because sometimes saying everything I want to say in one message just doesn't feel enough.<br><br>So here are games, stupid little things, future adventures, random happiness and one giant collection of reasons to smile.<br><br>I hope this birthday gives you even a tiny fraction of the happiness you deserve.<br><br>Here's to more laughs, more random conversations, more adventures, more memories, and so many more days together.<br><br><strong>Happy Birthday. ♡</strong></div>
+  </div>
+</div></section>
+
+<footer>made with way too much love ♡</footer>
+
+<div class="modal" id="modal"><div class="modal-box"><button class="close" onclick="closeModal()">×</button><h2 id="modalTitle"></h2><p id="modalText"></p><button class="primary" onclick="closeModal()">keep exploring ♡</button></div></div>
 
 <script>
-
-/* =========================================================
-   GLOBAL PROGRESS
-========================================================= */
-
-let discovered =
-JSON.parse(
-    localStorage.getItem("birthdayWorldDiscovered") || "[]"
-);
+const PROGRESS_KEY="birthdayWorldDiscoveredV2";
+let discovered=JSON.parse(localStorage.getItem(PROGRESS_KEY)||"[]");
 
 function updateProgress(){
-
-    document.getElementById("progressCount")
-        .textContent = discovered.length;
-
-    if(discovered.length >= 6){
-
-        document.getElementById("lockedFinal")
-            .style.display="none";
-
-        document.getElementById("finalContent")
-            .classList.add("show");
-
-        unlockAchievement("achievement-all");
-
-    }
-
+  document.getElementById("progressCount").textContent=discovered.length;
+  if(discovered.length>=4){
+    document.getElementById("lockedFinal").style.display="none";
+    document.getElementById("finalContent").classList.add("show");
+    unlockAchievement("achievement-all");
+  }
 }
-
 function discover(number){
-
-    if(!discovered.includes(number)){
-
-        discovered.push(number);
-
-        localStorage.setItem(
-            "birthdayWorldDiscovered",
-            JSON.stringify(discovered)
-        );
-
-    }
-
-    updateProgress();
-
+  if(!discovered.includes(number)){
+    discovered.push(number);
+    localStorage.setItem(PROGRESS_KEY,JSON.stringify(discovered));
+  }
+  updateProgress();
 }
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 
-
-/* =========================================================
-   SECTION NAVIGATION
-========================================================= */
-
-function scrollToId(id){
-
-    document
-        .getElementById(id)
-        .scrollIntoView({
-            behavior:"smooth"
-        });
-
-}
-
-
-/* =========================================================
-   FLOATING FLOWERS
-========================================================= */
-
-const flowerSymbols=[
-    "🌷",
-    "🌸",
-    "🌺",
-    "🌼",
-    "🪻",
-    "✿"
-];
-
+const flowerSymbols=["🌷","🌸","🌺","🌼","🪻","✿"];
 for(let i=0;i<20;i++){
-
-    const f=document.createElement("div");
-
-    f.className="flower";
-
-    f.textContent=
-        flowerSymbols[
-            Math.floor(
-                Math.random()*flowerSymbols.length
-            )
-        ];
-
-    f.style.left=Math.random()*100+"%";
-
-    f.style.fontSize=
-        (15+Math.random()*20)+"px";
-
-    f.style.animationDuration=
-        (12+Math.random()*18)+"s";
-
-    f.style.animationDelay=
-        (-Math.random()*20)+"s";
-
-    document
-        .getElementById("flowers")
-        .appendChild(f);
-
+  const f=document.createElement("div");f.className="flower";
+  f.textContent=flowerSymbols[Math.floor(Math.random()*flowerSymbols.length)];
+  f.style.left=Math.random()*100+"%";f.style.fontSize=15+Math.random()*20+"px";
+  f.style.animationDuration=12+Math.random()*18+"s";f.style.animationDelay=-Math.random()*20+"s";
+  document.getElementById("flowers").appendChild(f);
 }
-
-
-/* =========================================================
-   SPARKLES
-========================================================= */
-
 for(let i=0;i<25;i++){
-
-    const s=document.createElement("div");
-
-    s.className="spark";
-
-    s.style.left=Math.random()*100+"%";
-
-    s.style.top=Math.random()*100+"%";
-
-    s.style.animationDelay=
-        Math.random()*3+"s";
-
-    document
-        .getElementById("sparkles")
-        .appendChild(s);
-
+  const s=document.createElement("div");s.className="spark";
+  s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.animationDelay=Math.random()*3+"s";
+  document.getElementById("sparkles").appendChild(s);
 }
-
-
-/* =========================================================
-   OPEN GAME
-========================================================= */
 
 function openGame(game){
-
-    document
-        .querySelectorAll(".game-panel")
-        .forEach(panel=>{
-            panel.classList.remove("active");
-        });
-
-    const target=
-        document.getElementById("game-"+game);
-
-    target.classList.add("active");
-
-    target.scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
-
-    discover(1);
-
-    unlockAchievement("achievement-game");
-
-    if(game==="xo"){
-        resetXO();
-    }
-
-    if(game==="puzzle"){
-        shufflePuzzle();
-    }
-
-    if(game==="memory"){
-        setupMemory();
-    }
-
-    if(game==="scramble"){
-        newScramble();
-    }
-
-    if(game==="wyr"){
-        loadWYR();
-    }
-
+  document.querySelectorAll(".game-panel").forEach(p=>p.classList.remove("active"));
+  const target=document.getElementById("game-"+game);
+  target.classList.add("active");target.scrollIntoView({behavior:"smooth",block:"center"});
+  discover(1);unlockAchievement("achievement-game");
+  if(game==="xo")resetXO();
+  if(game==="puzzle")shufflePuzzle();
+  if(game==="memory")setupMemory();
+  if(game==="scramble")newScramble();
+  if(game==="wyr")loadWYR();
 }
 
-
-/* =========================================================
-   TIC TAC TOE
-========================================================= */
-
-let xoBoard=[];
-let xoGameOver=false;
-
+let xoBoard=[],xoGameOver=false;
 function resetXO(){
-
-    xoBoard=[
-        "","","",
-        "","","",
-        "","",""
-    ];
-
-    xoGameOver=false;
-
-    const board=
-        document.getElementById("xoBoard");
-
-    board.innerHTML="";
-
-    xoBoard.forEach((value,index)=>{
-
-        const cell=
-            document.createElement("button");
-
-        cell.className="xo-cell";
-
-        cell.onclick=()=>{
-            playerMove(index);
-        };
-
-        board.appendChild(cell);
-
-    });
-
-    document.getElementById("xoMessage")
-        .textContent="Your turn ♡";
-
+  xoBoard=["","","","","","","","",""];xoGameOver=false;
+  const board=document.getElementById("xoBoard");board.innerHTML="";
+  xoBoard.forEach((_,i)=>{const c=document.createElement("button");c.className="xo-cell";c.onclick=()=>playerMove(i);board.appendChild(c)});
+  document.getElementById("xoMessage").textContent="Your turn ♡";
 }
-
-function playerMove(index){
-
-    if(
-        xoGameOver ||
-        xoBoard[index]!==""
-    ){
-        return;
-    }
-
-    xoBoard[index]="X";
-
-    renderXO();
-
-    if(checkWinner("X")){
-
-        xoGameOver=true;
-
-        document.getElementById("xoMessage")
-            .textContent=
-            "YOU WIN 😭💜";
-
-        return;
-    }
-
-    if(!xoBoard.includes("")){
-
-        xoGameOver=true;
-
-        document.getElementById("xoMessage")
-            .textContent=
-            "It's a draw 👀";
-
-        return;
-    }
-
-    document.getElementById("xoMessage")
-        .textContent="Computer thinking...";
-
-    setTimeout(computerMove,450);
-
+function playerMove(i){
+  if(xoGameOver||xoBoard[i]!=="")return;
+  xoBoard[i]="X";renderXO();
+  if(checkWinner("X")){xoGameOver=true;document.getElementById("xoMessage").textContent="YOU WIN 😭💜";return}
+  if(!xoBoard.includes("")){xoGameOver=true;document.getElementById("xoMessage").textContent="It's a draw 👀";return}
+  document.getElementById("xoMessage").textContent="Computer thinking...";setTimeout(computerMove,450);
 }
-
 function computerMove(){
-
-    if(xoGameOver) return;
-
-    const empty=[];
-
-    xoBoard.forEach((value,index)=>{
-
-        if(value===""){
-            empty.push(index);
-        }
-
-    });
-
-    if(empty.length===0) return;
-
-    /*
-       Simple computer:
-       tries to win,
-       then blocks,
-       then chooses a space.
-    */
-
-    let chosen=null;
-
-    for(const i of empty){
-
-        xoBoard[i]="O";
-
-        if(checkWinner("O")){
-
-            chosen=i;
-
-            xoBoard[i]="";
-
-            break;
-
-        }
-
-        xoBoard[i]="";
-
-    }
-
-    if(chosen===null){
-
-        for(const i of empty){
-
-            xoBoard[i]="X";
-
-            if(checkWinner("X")){
-
-                chosen=i;
-
-                xoBoard[i]="";
-
-                break;
-
-            }
-
-            xoBoard[i]="";
-
-        }
-
-    }
-
-    if(chosen===null){
-
-        if(empty.includes(4)){
-            chosen=4;
-        }
-        else{
-            chosen=
-                empty[
-                    Math.floor(
-                        Math.random()*empty.length
-                    )
-                ];
-        }
-
-    }
-
-    xoBoard[chosen]="O";
-
-    renderXO();
-
-    if(checkWinner("O")){
-
-        xoGameOver=true;
-
-        document.getElementById("xoMessage")
-            .textContent=
-            "The computer won 😭 Try again.";
-
-        return;
-    }
-
-    if(!xoBoard.includes("")){
-
-        xoGameOver=true;
-
-        document.getElementById("xoMessage")
-            .textContent="Draw! ♡";
-
-        return;
-    }
-
-    document.getElementById("xoMessage")
-        .textContent="Your turn ♡";
-
+  if(xoGameOver)return;
+  const empty=xoBoard.map((v,i)=>v===""?i:-1).filter(i=>i>=0);if(!empty.length)return;
+  let chosen=null;
+  for(const i of empty){xoBoard[i]="O";if(checkWinner("O"))chosen=i;xoBoard[i]="";if(chosen!==null)break}
+  if(chosen===null)for(const i of empty){xoBoard[i]="X";if(checkWinner("X"))chosen=i;xoBoard[i]="";if(chosen!==null)break}
+  if(chosen===null)chosen=empty.includes(4)?4:empty[Math.floor(Math.random()*empty.length)];
+  xoBoard[chosen]="O";renderXO();
+  if(checkWinner("O")){xoGameOver=true;document.getElementById("xoMessage").textContent="The computer won 😭 Try again.";return}
+  if(!xoBoard.includes("")){xoGameOver=true;document.getElementById("xoMessage").textContent="Draw! ♡";return}
+  document.getElementById("xoMessage").textContent="Your turn ♡";
 }
-
-function renderXO(){
-
-    const cells=
-        document.querySelectorAll(".xo-cell");
-
-    cells.forEach((cell,index)=>{
-
-        cell.textContent=
-            xoBoard[index];
-
-    });
-
-}
-
-function checkWinner(player){
-
-    const wins=[
-        [0,1,2],
-        [3,4,5],
-        [6,7,8],
-        [0,3,6],
-        [1,4,7],
-        [2,5,8],
-        [0,4,8],
-        [2,4,6]
-    ];
-
-    return wins.some(combo=>
-        combo.every(i=>xoBoard[i]===player)
-    );
-
-}
-
+function renderXO(){document.querySelectorAll(".xo-cell").forEach((c,i)=>c.textContent=xoBoard[i])}
+function checkWinner(p){return [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]].some(w=>w.every(i=>xoBoard[i]===p))}
 resetXO();
 
-
-/* =========================================================
-   SLIDING PUZZLE
-========================================================= */
-
-let puzzle=[
-    1,2,3,
-    4,5,6,
-    7,8,0
-];
-
+let puzzle=[1,2,3,4,5,6,7,8,0];
 function shufflePuzzle(){
-
-    /*
-       Start from solved state and make
-       many valid moves so it is always solvable.
-    */
-
-    puzzle=[
-        1,2,3,
-        4,5,6,
-        7,8,0
-    ];
-
-    let previous=-1;
-
-    for(let i=0;i<100;i++){
-
-        const empty=puzzle.indexOf(0);
-
-        const row=Math.floor(empty/3);
-        const col=empty%3;
-
-        let possible=[];
-
-        if(row>0) possible.push(empty-3);
-        if(row<2) possible.push(empty+3);
-        if(col>0) possible.push(empty-1);
-        if(col<2) possible.push(empty+1);
-
-        possible=
-            possible.filter(x=>x!==previous);
-
-        const selected=
-            possible[
-                Math.floor(
-                    Math.random()*possible.length
-                )
-            ];
-
-        [puzzle[empty],puzzle[selected]]=
-        [puzzle[selected],puzzle[empty]];
-
-        previous=empty;
-
-    }
-
-    renderPuzzle();
-
-    document.getElementById("puzzleMessage")
-        .textContent="Good luck 👀";
-
+  puzzle=[1,2,3,4,5,6,7,8,0];let previous=-1;
+  for(let n=0;n<100;n++){
+    const empty=puzzle.indexOf(0),row=Math.floor(empty/3),col=empty%3;
+    let possible=[];if(row>0)possible.push(empty-3);if(row<2)possible.push(empty+3);if(col>0)possible.push(empty-1);if(col<2)possible.push(empty+1);
+    possible=possible.filter(x=>x!==previous);const selected=possible[Math.floor(Math.random()*possible.length)];
+    [puzzle[empty],puzzle[selected]]=[puzzle[selected],puzzle[empty]];previous=empty;
+  }
+  renderPuzzle();document.getElementById("puzzleMessage").textContent="Good luck 👀";
 }
-
 function renderPuzzle(){
-
-    const board=
-        document.getElementById("puzzleBoard");
-
-    board.innerHTML="";
-
-    puzzle.forEach((number,index)=>{
-
-        const tile=
-            document.createElement("button");
-
-        tile.className="puzzle-tile";
-
-        if(number===0){
-
-            tile.classList.add("empty");
-
-        }
-        else{
-
-            tile.textContent=number;
-
-            tile.onclick=()=>{
-                movePuzzle(index);
-            };
-
-        }
-
-        board.appendChild(tile);
-
-    });
-
+  const board=document.getElementById("puzzleBoard");board.innerHTML="";
+  puzzle.forEach((num,i)=>{const t=document.createElement("button");t.className="puzzle-tile";
+    if(num===0)t.classList.add("empty");else{t.textContent=num;t.onclick=()=>movePuzzle(i)}board.appendChild(t)});
 }
-
-function movePuzzle(index){
-
-    const empty=
-        puzzle.indexOf(0);
-
-    const sameRow=
-        Math.floor(index/3)===
-        Math.floor(empty/3);
-
-    const distance=
-        Math.abs(index-empty);
-
-    const adjacent=
-        (sameRow && distance===1) ||
-        distance===3;
-
-    if(!adjacent) return;
-
-    [puzzle[index],puzzle[empty]]=
-    [puzzle[empty],puzzle[index]];
-
-    renderPuzzle();
-
-    if(
-        puzzle.join(",")===
-        "1,2,3,4,5,6,7,8,0"
-    ){
-
-        document.getElementById("puzzleMessage")
-            .textContent=
-            "PUZZLE MASTER! 🧩✨";
-
-        unlockAchievement("achievement-puzzle");
-
-    }
-
+function movePuzzle(i){
+  const empty=puzzle.indexOf(0),sameRow=Math.floor(i/3)===Math.floor(empty/3),distance=Math.abs(i-empty);
+  if(!((sameRow&&distance===1)||distance===3))return;
+  [puzzle[i],puzzle[empty]]=[puzzle[empty],puzzle[i]];renderPuzzle();
+  if(puzzle.join(",")==="1,2,3,4,5,6,7,8,0"){document.getElementById("puzzleMessage").textContent="PUZZLE MASTER! 🧩✨";unlockAchievement("achievement-puzzle")}
 }
-
 shufflePuzzle();
 
-
-/* =========================================================
-   MEMORY MATCH
-========================================================= */
-
-const memorySymbols=[
-    "🌷","🌷",
-    "💜","💜",
-    "🦋","🦋",
-    "🌙","🌙",
-    "✨","✨",
-    "🌸","🌸"
-];
-
-let memoryFirst=null;
-let memorySecond=null;
-let memoryLocked=false;
-let memoryMatches=0;
-
+const memorySymbols=["🌷","🌷","💜","💜","🦋","🦋","🌙","🌙","✨","✨","🌸","🌸"];
+let memoryFirst=null,memorySecond=null,memoryLocked=false,memoryMatches=0;
 function setupMemory(){
-
-    memoryFirst=null;
-    memorySecond=null;
-    memoryLocked=false;
-    memoryMatches=0;
-
-    const shuffled=
-        [...memorySymbols]
-        .sort(()=>Math.random()-.5);
-
-    const board=
-        document.getElementById("memoryBoard");
-
-    board.innerHTML="";
-
-    shuffled.forEach(symbol=>{
-
-        const card=
-            document.createElement("button");
-
-        card.className="memory-card";
-
-        card.dataset.symbol=symbol;
-
-        card.textContent=symbol;
-
-        card.onclick=()=>{
-            flipMemory(card);
-        };
-
-        board.appendChild(card);
-
-    });
-
-    document.getElementById("memoryMessage")
-        .textContent="Find the pairs ♡";
-
+  memoryFirst=null;memorySecond=null;memoryLocked=false;memoryMatches=0;
+  const shuffled=[...memorySymbols].sort(()=>Math.random()-.5),board=document.getElementById("memoryBoard");board.innerHTML="";
+  shuffled.forEach(symbol=>{const card=document.createElement("button");card.className="memory-card";card.dataset.symbol=symbol;card.textContent=symbol;card.onclick=()=>flipMemory(card);board.appendChild(card)});
+  document.getElementById("memoryMessage").textContent="Find the pairs ♡";
 }
-
 function flipMemory(card){
-
-    if(
-        memoryLocked ||
-        card.classList.contains("flipped") ||
-        card.classList.contains("matched")
-    ){
-        return;
-    }
-
-    card.classList.add("flipped");
-
-    if(!memoryFirst){
-
-        memoryFirst=card;
-        return;
-
-    }
-
-    memorySecond=card;
-
-    if(
-        memoryFirst.dataset.symbol===
-        memorySecond.dataset.symbol
-    ){
-
-        memoryFirst.classList.add("matched");
-        memorySecond.classList.add("matched");
-
-        memoryMatches++;
-
-        memoryFirst=null;
-        memorySecond=null;
-
-        if(memoryMatches===
-            memorySymbols.length/2){
-
-            document.getElementById("memoryMessage")
-                .textContent=
-                "You found them all! 🌷✨";
-
-        }
-
-    }
-    else{
-
-        memoryLocked=true;
-
-        setTimeout(()=>{
-
-            memoryFirst.classList.remove("flipped");
-            memorySecond.classList.remove("flipped");
-
-            memoryFirst=null;
-            memorySecond=null;
-
-            memoryLocked=false;
-
-        },700);
-
-    }
-
+  if(memoryLocked||card.classList.contains("flipped")||card.classList.contains("matched"))return;
+  card.classList.add("flipped");
+  if(!memoryFirst){memoryFirst=card;return}
+  memorySecond=card;
+  if(memoryFirst.dataset.symbol===memorySecond.dataset.symbol){
+    memoryFirst.classList.add("matched");memorySecond.classList.add("matched");memoryMatches++;memoryFirst=null;memorySecond=null;
+    if(memoryMatches===memorySymbols.length/2)document.getElementById("memoryMessage").textContent="You found them all! 🌷✨";
+  }else{
+    memoryLocked=true;setTimeout(()=>{memoryFirst.classList.remove("flipped");memorySecond.classList.remove("flipped");memoryFirst=null;memorySecond=null;memoryLocked=false},700);
+  }
 }
-
 setupMemory();
 
-
-/* =========================================================
-   REACTION GAME
-========================================================= */
-
-let reactionState="idle";
-let reactionStart=0;
-let reactionTimer=null;
-
+let reactionState="idle",reactionStart=0,reactionTimer=null;
 function startReaction(){
-
-    const box=
-        document.getElementById("reactionBox");
-
-    const message=
-        document.getElementById("reactionMessage");
-
-    reactionState="waiting";
-
-    box.className="reaction-box";
-
-    box.textContent=
-        "WAIT FOR IT...";
-
-    message.textContent=
-        "Don't click yet 👀";
-
-    const delay=
-        1500+
-        Math.random()*3500;
-
-    clearTimeout(reactionTimer);
-
-    reactionTimer=
-        setTimeout(()=>{
-
-            reactionState="go";
-
-            reactionStart=
-                performance.now();
-
-            box.className=
-                "reaction-box go";
-
-            box.textContent=
-                "CLICK!!! 💜";
-
-        },delay);
-
+  const box=document.getElementById("reactionBox"),message=document.getElementById("reactionMessage");
+  reactionState="waiting";box.className="reaction-box";box.textContent="WAIT FOR IT...";message.textContent="Don't click yet 👀";
+  clearTimeout(reactionTimer);reactionTimer=setTimeout(()=>{reactionState="go";reactionStart=performance.now();box.className="reaction-box go";box.textContent="CLICK!!! 💜"},1500+Math.random()*3500);
 }
-
 function reactionClick(){
-
-    const box=
-        document.getElementById("reactionBox");
-
-    const message=
-        document.getElementById("reactionMessage");
-
-    if(reactionState==="waiting"){
-
-        clearTimeout(reactionTimer);
-
-        reactionState="idle";
-
-        box.className="reaction-box";
-
-        box.textContent=
-            "TOO EARLY 😂";
-
-        message.textContent=
-            "I literally said wait.";
-
-        return;
-
-    }
-
-    if(reactionState==="go"){
-
-        const time=
-            Math.round(
-                performance.now()-reactionStart
-            );
-
-        reactionState="idle";
-
-        box.className="reaction-box";
-
-        box.textContent=
-            time+" ms";
-
-        message.textContent=
-            time<250
-            ? "WHAT 😭 That's fast."
-            : time<400
-            ? "Pretty good 👀"
-            : "Okay okay... we can train.";
-
-    }
-
+  const box=document.getElementById("reactionBox"),message=document.getElementById("reactionMessage");
+  if(reactionState==="waiting"){clearTimeout(reactionTimer);reactionState="idle";box.className="reaction-box";box.textContent="TOO EARLY 😂";message.textContent="I literally said wait.";return}
+  if(reactionState==="go"){const time=Math.round(performance.now()-reactionStart);reactionState="idle";box.className="reaction-box";box.textContent=time+" ms";message.textContent=time<250?"WHAT 😭 That's fast.":time<400?"Pretty good 👀":"Okay okay... we can train."}
 }
 
-
-/* =========================================================
-   WORD SCRAMBLE
-========================================================= */
-
-const scrambleWords=[
-    "LOVE",
-    "SMILE",
-    "FLOWER",
-    "PURPLE",
-    "HAPPY",
-    "SUNSET",
-    "DREAM",
-    "CUDDLE",
-    "MEMORY",
-    "FOREVER",
-    "LAUGH",
-    "BIRTHDAY"
-];
-
+const scrambleWords=["LOVE","SMILE","FLOWER","PURPLE","HAPPY","SUNSET","DREAM","CUDDLE","MEMORY","FOREVER","LAUGH","BIRTHDAY"];
 let scrambleAnswer="";
-
-function shuffleLetters(word){
-
-    return word
-        .split("")
-        .sort(()=>Math.random()-.5)
-        .join("");
-
-}
-
+function shuffleLetters(word){return word.split("").sort(()=>Math.random()-.5).join("")}
 function newScramble(){
-
-    scrambleAnswer=
-        scrambleWords[
-            Math.floor(
-                Math.random()*scrambleWords.length
-            )
-        ];
-
-    let scrambled=
-        shuffleLetters(scrambleAnswer);
-
-    while(
-        scrambled===scrambleAnswer &&
-        scrambleAnswer.length>2
-    ){
-
-        scrambled=
-            shuffleLetters(scrambleAnswer);
-
-    }
-
-    document.getElementById("scrambleWord")
-        .textContent=scrambled;
-
-    document.getElementById("scrambleInput")
-        .value="";
-
-    document.getElementById("scrambleMessage")
-        .textContent="";
-
+  scrambleAnswer=scrambleWords[Math.floor(Math.random()*scrambleWords.length)];
+  let scrambled=shuffleLetters(scrambleAnswer);
+  while(scrambled===scrambleAnswer&&scrambleAnswer.length>2)scrambled=shuffleLetters(scrambleAnswer);
+  document.getElementById("scrambleWord").textContent=scrambled;document.getElementById("scrambleInput").value="";document.getElementById("scrambleMessage").textContent="";
 }
-
 function checkScramble(){
-
-    const answer=
-        document.getElementById("scrambleInput")
-        .value
-        .trim()
-        .toUpperCase();
-
-    const message=
-        document.getElementById("scrambleMessage");
-
-    if(answer===scrambleAnswer){
-
-        message.textContent=
-            "CORRECT! ✨";
-
-    }
-    else{
-
-        message.textContent=
-            "Nope 👀 Try again.";
-
-    }
-
+  const answer=document.getElementById("scrambleInput").value.trim().toUpperCase(),message=document.getElementById("scrambleMessage");
+  message.textContent=answer===scrambleAnswer?"CORRECT! ✨":"Nope 👀 Try again.";
 }
-
 newScramble();
 
-
-/* =========================================================
-   WOULD YOU RATHER
-========================================================= */
-
 const wyrQuestions=[
-    {
-        q:"Would you rather...",
-        a:"🌙 Go for a late-night walk",
-        b:"☀️ Watch the sunrise"
-    },
-    {
-        q:"Would you rather...",
-        a:"🍕 Have unlimited pizza",
-        b:"🍰 Have unlimited cake"
-    },
-    {
-        q:"Would you rather...",
-        a:"🎬 Movie marathon",
-        b:"🎮 Game marathon"
-    },
-    {
-        q:"Would you rather...",
-        a:"🌊 Beach date",
-        b:"🌳 Nature date"
-    },
-    {
-        q:"Would you rather...",
-        a:"📸 Take 100 photos",
-        b:"🧠 Make one unforgettable memory"
-    },
-    {
-        q:"Would you rather...",
-        a:"☕ Cute café",
-        b:"🍽️ Fancy dinner"
-    }
+ {q:"Would you rather...",a:"🌙 Go for a late-night walk",b:"☀️ Watch the sunrise"},
+ {q:"Would you rather...",a:"🍕 Have unlimited pizza",b:"🍰 Have unlimited cake"},
+ {q:"Would you rather...",a:"🎬 Movie marathon",b:"🎮 Game marathon"},
+ {q:"Would you rather...",a:"🌊 Beach date",b:"🌳 Nature date"},
+ {q:"Would you rather...",a:"📸 Take 100 photos",b:"🧠 Make one unforgettable memory"},
+ {q:"Would you rather...",a:"☕ Cute café",b:"🍽️ Fancy dinner"}
 ];
-
 let wyrIndex=0;
-
 function loadWYR(){
-
-    const q=
-        wyrQuestions[
-            wyrIndex
-        ];
-
-    document.getElementById("wyrQuestion")
-        .textContent=q.q;
-
-    const container=
-        document.getElementById("wyrOptions");
-
-    container.innerHTML="";
-
-    [q.a,q.b].forEach(option=>{
-
-        const button=
-            document.createElement("button");
-
-        button.className="wyr-button";
-
-        button.textContent=option;
-
-        button.onclick=()=>{
-
-            document.getElementById("wyrMessage")
-                .textContent=
-                "Interesting choice 👀";
-
-            setTimeout(()=>{
-
-                wyrIndex=
-                    (wyrIndex+1)%
-                    wyrQuestions.length;
-
-                loadWYR();
-
-            },900);
-
-        };
-
-        container.appendChild(button);
-
-    });
-
+  const q=wyrQuestions[wyrIndex],container=document.getElementById("wyrOptions");document.getElementById("wyrQuestion").textContent=q.q;container.innerHTML="";
+  [q.a,q.b].forEach(option=>{const b=document.createElement("button");b.className="wyr-button";b.textContent=option;b.onclick=()=>{document.getElementById("wyrMessage").textContent="Interesting choice 👀";setTimeout(()=>{wyrIndex=(wyrIndex+1)%wyrQuestions.length;loadWYR()},900)};container.appendChild(b)});
 }
-
 loadWYR();
 
-
-/* =========================================================
-   DICE
-========================================================= */
-
-const diceFaces=[
-    "⚀",
-    "⚁",
-    "⚂",
-    "⚃",
-    "⚄",
-    "⚅"
-];
-
+const diceFaces=["⚀","⚁","⚂","⚃","⚄","⚅"];
 function rollDice(){
-
-    const dice=
-        document.getElementById("dice");
-
-    const message=
-        document.getElementById("diceMessage");
-
-    dice.classList.remove("roll");
-
-    void dice.offsetWidth;
-
-    dice.classList.add("roll");
-
-    const number=
-        Math.floor(Math.random()*6);
-
-    dice.textContent=
-        diceFaces[number];
-
-    const messages=[
-        "Lucky today ✨",
-        "The universe approves.",
-        "Interesting... 👀",
-        "That's your sign.",
-        "I think fate is being dramatic.",
-        "Okay, destiny has spoken."
-    ];
-
-    message.textContent=
-        messages[number];
-
+  const dice=document.getElementById("dice"),message=document.getElementById("diceMessage");dice.classList.remove("roll");void dice.offsetWidth;dice.classList.add("roll");
+  const n=Math.floor(Math.random()*6);dice.textContent=diceFaces[n];
+  message.textContent=["Lucky today ✨","The universe approves.","Interesting... 👀","That's your sign.","I think fate is being dramatic.","Okay, destiny has spoken."][n];
 }
 
-
-/* =========================================================
-   LOVE FORTUNE
-========================================================= */
-
-const fortunes=[
-    "A very good day is probably closer than you think. 💜",
-    "Something unexpectedly cute may happen soon. ✨",
-    "Your future contains food. This is important. 🍰",
-    "Someone thinks you're more special than you realise. ♡",
-    "A random adventure is waiting for you. 🌷",
-    "Your next great memory probably hasn't happened yet. 💫",
-    "The universe recommends smiling today.",
-    "You are about to have a very silly conversation. 😂",
-    "A tiny moment is going to become a big memory.",
-    "Your luck level today: suspiciously good.",
-    "You should probably accept the next snack offered to you.",
-    "There is happiness hiding in an ordinary day. ☀️",
-    "Your future looks purple. Obviously. 💜"
-];
-
+const fortunes=["A very good day is probably closer than you think. 💜","Something unexpectedly cute may happen soon. ✨","Your future contains food. This is important. 🍰","Someone thinks you're more special than you realise. ♡","A random adventure is waiting for you. 🌷","Your next great memory probably hasn't happened yet. 💫","The universe recommends smiling today.","You are about to have a very silly conversation. 😂","A tiny moment is going to become a big memory.","Your luck level today: suspiciously good.","You should probably accept the next snack offered to you.","There is happiness hiding in an ordinary day. ☀️","Your future looks purple. Obviously. 💜"];
 function newFortune(){
-
-    const result=
-        document.getElementById("fortuneResult");
-
-    result.style.opacity=0;
-
-    setTimeout(()=>{
-
-        result.textContent=
-            fortunes[
-                Math.floor(
-                    Math.random()*fortunes.length
-                )
-            ];
-
-        result.style.opacity=1;
-
-    },250);
-
+  const result=document.getElementById("fortuneResult");result.style.opacity=0;
+  setTimeout(()=>{result.textContent=fortunes[Math.floor(Math.random()*fortunes.length)];result.style.opacity=1},250);
 }
 
-
-/* =========================================================
-   FLAMES
-========================================================= */
-
-function cleanName(name){
-
-    return name
-        .toLowerCase()
-        .replace(/[^a-z]/g,"");
-
-}
-
+function cleanName(name){return name.toLowerCase().replace(/[^a-z]/g,"")}
 function calculateFlames(){
-
-    const first=
-        cleanName(
-            document.getElementById("flamesName1").value
-        );
-
-    const second=
-        cleanName(
-            document.getElementById("flamesName2").value
-        );
-
-    const result=
-        document.getElementById("flamesResult");
-
-    if(!first || !second){
-
-        result.innerHTML=
-            "<p>Please enter both names first 💜</p>";
-
-        return;
-
-    }
-
-    /*
-       Count unmatched letters.
-    */
-
-    let a=first.split("");
-    let b=second.split("");
-
-    for(let i=a.length-1;i>=0;i--){
-
-        const index=b.indexOf(a[i]);
-
-        if(index!==-1){
-
-            a.splice(i,1);
-            b.splice(index,1);
-
-        }
-
-    }
-
-    const remaining=
-        a.length+b.length;
-
-    /*
-       FLAMES elimination.
-    */
-
-    const letters=[
-        "F",
-        "L",
-        "A",
-        "M",
-        "E",
-        "S"
-    ];
-
-    let active=[
-        ...letters
-    ];
-
-    let index=0;
-
-    while(active.length>1){
-
-        index=
-            (index+remaining-1)%
-            active.length;
-
-        active.splice(index,1);
-
-    }
-
-    const finalLetter=
-        active[0];
-
-    const meanings={
-        F:{
-            title:"Friends",
-            emoji:"🤝",
-            text:"Apparently the universe thinks friendship is the answer. 👀"
-        },
-
-        L:{
-            title:"Love",
-            emoji:"💜",
-            text:"Okayyyy... the universe is being suspiciously cute."
-        },
-
-        A:{
-            title:"Affection",
-            emoji:"🫶",
-            text:"There is definitely some very strong affection here."
-        },
-
-        M:{
-            title:"Marriage",
-            emoji:"💍",
-            text:"WOAH. The FLAMES algorithm really went there."
-        },
-
-        E:{
-            title:"Enemies",
-            emoji:"😂",
-            text:"The algorithm has chosen chaos. I refuse to accept this result."
-        },
-
-        S:{
-            title:"Siblings",
-            emoji:"😭",
-            text:"Absolutely not. We are requesting a recount."
-        }
-    };
-
-    /*
-       Animate the letters disappearing.
-    */
-
-    const letterElements=
-        document.querySelectorAll(
-            ".flame-letter"
-        );
-
-    letterElements.forEach((el,index)=>{
-
-        el.classList.remove("removed");
-
-        if(
-            letters[index]!==finalLetter
-        ){
-
-            setTimeout(()=>{
-
-                el.classList.add("removed");
-
-            },index*180);
-
-        }
-
-    });
-
-    setTimeout(()=>{
-
-        const meaning=
-            meanings[finalLetter];
-
-        result.innerHTML=`
-
-            <div class="result-letter">
-                ${meaning.emoji}
-            </div>
-
-            <h3>
-                ${finalLetter} — ${meaning.title}
-            </h3>
-
-            <p>
-                ${meaning.text}
-            </p>
-
-        `;
-
-    },1200);
-
-    discover(7);
-
-    unlockAchievement("achievement-flames");
-
+  const first=cleanName(document.getElementById("flamesName1").value),second=cleanName(document.getElementById("flamesName2").value),result=document.getElementById("flamesResult");
+  if(!first||!second){result.innerHTML="<p>Please enter both names first 💜</p>";return}
+  let a=first.split(""),b=second.split("");
+  for(let i=a.length-1;i>=0;i--){const idx=b.indexOf(a[i]);if(idx!==-1){a.splice(i,1);b.splice(idx,1)}}
+  const remaining=a.length+b.length,letters=["F","L","A","M","E","S"];let active=[...letters],index=0;
+  while(active.length>1){index=(index+remaining-1)%active.length;active.splice(index,1)}
+  const finalLetter=active[0];
+  const meanings={
+    F:{title:"Friends",emoji:"🤝",text:"Apparently the universe thinks friendship is the answer. 👀"},
+    L:{title:"Love",emoji:"💜",text:"Okayyyy... the universe is being suspiciously cute."},
+    A:{title:"Affection",emoji:"🫶",text:"There is definitely some very strong affection here."},
+    M:{title:"Marriage",emoji:"💍",text:"WOAH. The FLAMES algorithm really went there."},
+    E:{title:"Enemies",emoji:"😂",text:"The algorithm has chosen chaos. I refuse to accept this result."},
+    S:{title:"Siblings",emoji:"😭",text:"Absolutely not. We are requesting a recount."}
+  };
+  document.querySelectorAll(".flame-letter").forEach((el,i)=>{el.classList.remove("removed");if(letters[i]!==finalLetter)setTimeout(()=>el.classList.add("removed"),i*180)});
+  setTimeout(()=>{const m=meanings[finalLetter];result.innerHTML=`<div class="result-letter">${m.emoji}</div><h3>${finalLetter} — ${m.title}</h3><p>${m.text}</p>`},1200);
+  discover(2);unlockAchievement("achievement-flames");
 }
-
-
-/* =========================================================
-   DATE CHECKBOX
-========================================================= */
 
 function completeDate(button){
-
-    if(button.textContent==="♡"){
-
-        button.textContent="✓";
-
-        button.style.background="#79518c";
-
-        unlockAchievement("achievement-date");
-
-    }
-    else{
-
-        button.textContent="♡";
-
-        button.style.background="#a479b7";
-
-    }
-
+  if(button.textContent==="♡"){button.textContent="✓";button.style.background="#79518c";discover(3);unlockAchievement("achievement-date")}
+  else{button.textContent="♡";button.style.background="#a479b7"}
 }
 
-
-/* =========================================================
-   HAPPINESS MACHINE
-========================================================= */
-
-const happyMessages=[
-
-    "You deserve a good day even when you haven't done anything special. 💜",
-
-    "Go listen to a song that makes you ridiculously happy. 🎧",
-
-    "Today's mission: get yourself something yummy. 🍰",
-
-    "I hope something unexpectedly nice happens to you today. 🌷",
-
-    "Reminder: you are allowed to have slow days. ☁️",
-
-    "Drink some water and continue being wonderful. 💧",
-
-    "Find one tiny thing today that makes you smile. ✨",
-
-    "You have survived every bad day you've had so far. That's pretty impressive. 🌙",
-
-    "Your only job right now is to enjoy one tiny moment. 🫶",
-
-    "Somewhere, a future memory is waiting to happen. 💫",
-
-    "You are someone's favorite notification. 📱💜",
-
-    "Today would be a good day for a little treat. 🍓",
-
-    "Don't forget to look at the sky sometimes. 🌌",
-
-    "You don't have to make every day extraordinary. 🌷",
-
-    "Here's your completely unnecessary reminder that you're lovely. ♡",
-
-    "You deserve softness, laughter and good things. 💜",
-
-    "Go make one tiny memory today.",
-
-    "The world is slightly better because you're in it. ♡"
-
-];
-
+const happyMessages=["You deserve a good day even when you haven't done anything special. 💜","Go listen to a song that makes you ridiculously happy. 🎧","Today's mission: get yourself something yummy. 🍰","I hope something unexpectedly nice happens to you today. 🌷","Reminder: you are allowed to have slow days. ☁️","Drink some water and continue being wonderful. 💧","Find one tiny thing today that makes you smile. ✨","You have survived every bad day you've had so far. That's pretty impressive. 🌙","Your only job right now is to enjoy one tiny moment. 🫶","Somewhere, a future memory is waiting to happen. 💫","You are someone's favorite notification. 📱💜","Today would be a good day for a little treat. 🍓","Don't forget to look at the sky sometimes. 🌌","You don't have to make every day extraordinary. 🌷","Here's your completely unnecessary reminder that you're lovely. ♡","You deserve softness, laughter and good things. 💜","Go make one tiny memory today.","The world is slightly better because you're in it. ♡"];
 function newHappyMessage(){
-
-    const el=
-        document.getElementById("happyMessage");
-
-    el.style.opacity=0;
-
-    setTimeout(()=>{
-
-        el.textContent=
-            happyMessages[
-                Math.floor(
-                    Math.random()*
-                    happyMessages.length
-                )
-            ];
-
-        el.style.opacity=1;
-
-    },250);
-
-    unlockAchievement("achievement-happy");
-
+  const el=document.getElementById("happyMessage");el.style.opacity=0;
+  setTimeout(()=>{el.textContent=happyMessages[Math.floor(Math.random()*happyMessages.length)];el.style.opacity=1},250);
+  discover(4);unlockAchievement("achievement-happy");
 }
 
-
-/* =========================================================
-   ACHIEVEMENTS
-========================================================= */
-
-function unlockAchievement(id){
-
-    const element=
-        document.getElementById(id);
-
-    if(element){
-
-        element.classList.add("unlocked");
-
-    }
-
-}
-
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-function openModal(title,text){
-
-    document.getElementById("modalTitle")
-        .textContent=title;
-
-    document.getElementById("modalText")
-        .textContent=text;
-
-    document.getElementById("modal")
-        .classList.add("show");
-
-}
-
-function closeModal(){
-
-    document.getElementById("modal")
-        .classList.remove("show");
-
-}
-
-
-/* =========================================================
-   INITIALISE
-========================================================= */
-
+function unlockAchievement(id){const e=document.getElementById(id);if(e)e.classList.add("unlocked")}
+function openModal(title,text){document.getElementById("modalTitle").textContent=title;document.getElementById("modalText").textContent=text;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
 updateProgress();
-
 </script>
-
 </body>
 </html>
-```
